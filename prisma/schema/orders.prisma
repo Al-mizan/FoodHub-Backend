@@ -1,0 +1,42 @@
+model Orders {
+    id               String        @id @default(uuid())
+    user_id          String
+    user             User          @relation("CustomerOrders", fields: [user_id], references: [id])
+    provider_id      String
+    provider         User          @relation("ProviderOrders", fields: [provider_id], references: [id])
+    total_amount     Float         @db.DoublePrecision
+    status           OrderStatus   @default(pending)
+    payment_status   PaymentStatus @default(unpaid)
+    delivery_address String        @db.VarChar(500)
+    created_at       DateTime      @default(now())
+    updated_at       DateTime      @updatedAt
+    orderItems       OrderItems[]
+    reviews          Reviews[]
+}
+
+enum OrderStatus {
+    pending
+    confirmed
+    preparing
+    delivered
+    cancelled
+}
+
+enum PaymentStatus {
+    paid
+    unpaid
+    refunded
+}
+
+// payment_method (cash | card | bkash | nagad)  will be use in future updates apadoto cash on delivery
+
+model OrderItems {
+    id         String @id @default(uuid())
+    order_id   String
+    order      Orders @relation(fields: [order_id], references: [id], onDelete: Cascade)
+    meal_id    String
+    meal       Meals  @relation(fields: [meal_id], references: [id], onDelete: Cascade)
+    quantity   Int    @db.Integer
+    unit_price Float  @db.DoublePrecision
+    subtotal   Float  @db.DoublePrecision
+}

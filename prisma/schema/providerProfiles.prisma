@@ -1,0 +1,16 @@
+model ProviderProfiles {
+    id              String   @id @default(uuid())
+    user_id         String   @unique
+    user            User     @relation(fields: [user_id], references: [id])
+    restaurant_name String   @db.VarChar(500)
+    description     String?  @db.Text
+    address         String   @db.VarChar(500)
+    opening_time    DateTime @db.Time
+    closing_time    DateTime @db.Time
+    is_open         Boolean  @default(false)
+    logo_url        String?  @db.Text
+    banner_url      String?  @db.Text
+    rating_avg      Float    @default(0.0)
+    created_at      DateTime @default(now())
+    updated_at      DateTime @updatedAt
+}

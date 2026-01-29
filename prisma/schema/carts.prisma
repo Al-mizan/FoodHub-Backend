@@ -1,0 +1,32 @@
+model Carts {
+    id          String      @id @default(uuid())
+    user_id     String
+    user        User        @relation("UserCarts", fields: [user_id], references: [id])
+    provider_id String
+    provider    User        @relation("ProviderCarts", fields: [provider_id], references: [id])
+    meal_id     String
+    meal        Meals       @relation(fields: [meal_id], references: [id])
+    quantity    Int         @default(1) @db.Integer
+    status      CartStatus  @default(active)
+    created_at  DateTime    @default(now())
+    updated_at  DateTime    @updatedAt
+    cartItems   CartItems[]
+}
+
+enum CartStatus {
+    active
+    ordered
+    cancelled
+}
+
+model CartItems {
+    id          String   @id @default(uuid())
+    cart_id     String
+    cart        Carts    @relation(fields: [cart_id], references: [id], onDelete: Cascade)
+    meal_id     String
+    meal        Meals    @relation(fields: [meal_id], references: [id], onDelete: Cascade)
+    quantity    Int      @db.Integer
+    expiry_date DateTime @db.Timestamp(6)
+    unit_price  Float    @db.DoublePrecision
+    total_price Float    @db.DoublePrecision
+}

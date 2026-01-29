@@ -1,0 +1,29 @@
+model Meals {
+    id                  String       @id @default(uuid())
+    provider_id         String
+    user                User         @relation(fields: [provider_id], references: [id])
+    category_id         String
+    category            Categories   @relation(fields: [category_id], references: [id])
+    name                String       @db.VarChar(300)
+    description         String       @db.Text
+    price               Float        @db.DoublePrecision
+    discount_percentage Float?       @db.DoublePrecision
+    discount_price      Float?       @db.DoublePrecision
+    image_url           String       @db.Text
+    dietary_type        DietaryType  @default(MIX)
+    is_available        Boolean      @default(true)
+    preparation_time    Int          @db.Integer // minutes
+    created_at          DateTime     @default(now())
+    updated_at          DateTime     @updatedAt
+    orderItems          OrderItems[]
+    reviews             Reviews[]
+    carts               Carts[]
+    cartItems           CartItems[]
+}
+
+enum DietaryType {
+    VEG
+    HALAL
+    VEGAN
+    MIX
+}

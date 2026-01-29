@@ -1,0 +1,9 @@
+model Coupons {
+    id            String   @id @default(uuid())
+    code          String   @unique @db.VarChar(50)
+    discount_type String   @db.VarChar(20) // percentage, fixed
+    value         Float    @db.DoublePrecision
+    expiry_date   DateTime @db.Timestamp(6)
+    created_at    DateTime @default(now())
+    updated_at    DateTime @updatedAt
+}

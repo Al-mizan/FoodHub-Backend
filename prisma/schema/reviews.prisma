@@ -1,0 +1,13 @@
+model Reviews {
+    id         String   @id @default(uuid())
+    user_id    String
+    user       User     @relation(fields: [user_id], references: [id])
+    meal_id    String
+    meal       Meals    @relation(fields: [meal_id], references: [id])
+    order_id   String
+    order      Orders   @relation(fields: [order_id], references: [id])
+    rating     Int      @db.Integer
+    comment    String?  @db.Text
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}

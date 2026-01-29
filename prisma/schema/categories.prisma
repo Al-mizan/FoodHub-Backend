@@ -1,0 +1,11 @@
+model Categories {
+    id           String      @id @default(uuid())
+    name         String      @db.VarChar(100) // Pizza, Bengali, Chinese
+    slug         String      @unique @db.VarChar(20) // URL-friendly
+    icon_url     String?     @db.Text
+    is_active    Boolean     @default(true)
+    created_at   DateTime    @default(now())
+    updated_at   DateTime    @updatedAt
+    meals        Meals[]
+}
+
