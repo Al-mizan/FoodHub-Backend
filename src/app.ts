@@ -5,6 +5,7 @@ import { toNodeHandler } from 'better-auth/node';
 import { auth } from './lib/auth';
 import errorHandler from './middleware/globalErrorHandler';
 import { notFoundRoute } from './middleware/notFoundRoute';
+import { providersRoutes } from './modules/providers/providers.routes';
 
 const app: Application = express();
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
-// app.use('/api', );
+app.use('/api/providers', providersRoutes);
 
 
 // if there is no matching route

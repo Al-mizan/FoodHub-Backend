@@ -11,6 +11,8 @@ model Carts {
     created_at  DateTime    @default(now())
     updated_at  DateTime    @updatedAt
     cartItems   CartItems[]
+
+    @@map("carts")
 }
 
 enum CartStatus {
@@ -29,4 +31,6 @@ model CartItems {
     expiry_date DateTime @db.Timestamp(6)
     unit_price  Float    @db.DoublePrecision
     total_price Float    @db.DoublePrecision
+
+    @@map("cart_items")
 }

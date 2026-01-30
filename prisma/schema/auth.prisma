@@ -6,6 +6,10 @@ model User {
     image           String?
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @updatedAt
+    role            String            @default("CUSTOMER")
+    phone           String?
+    status          String            @default("ACTIVATE")
+    address         String?
     sessions        Session[]
     accounts        Account[]
     providerProfile ProviderProfiles?
@@ -17,6 +21,7 @@ model User {
     provider        Carts[]           @relation("ProviderCarts")
 
     @@unique([email])
+    @@index([role])
     @@map("user")
 }
 

@@ -13,4 +13,6 @@ model ProviderProfiles {
     rating_avg      Float    @default(0.0)
     created_at      DateTime @default(now())
     updated_at      DateTime @updatedAt
+
+    @@map("provider_profiles")
 }

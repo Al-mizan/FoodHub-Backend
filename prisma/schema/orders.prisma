@@ -12,6 +12,8 @@ model Orders {
     updated_at       DateTime      @updatedAt
     orderItems       OrderItems[]
     reviews          Reviews[]
+
+    @@map("orders")
 }
 
 enum OrderStatus {
@@ -39,4 +41,6 @@ model OrderItems {
     quantity   Int    @db.Integer
     unit_price Float  @db.DoublePrecision
     subtotal   Float  @db.DoublePrecision
+
+    @@map("order_items")
 }

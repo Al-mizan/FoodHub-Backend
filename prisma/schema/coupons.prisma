@@ -6,4 +6,6 @@ model Coupons {
     expiry_date   DateTime @db.Timestamp(6)
     created_at    DateTime @default(now())
     updated_at    DateTime @updatedAt
+
+    @@map("coupons")
 }
