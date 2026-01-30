@@ -3,11 +3,12 @@ import cors from 'cors';
 import { APP_URL } from './config/env';
 import { toNodeHandler } from 'better-auth/node';
 import { auth } from './lib/auth';
-import errorHandler from './middleware/globalErrorHandler';
 import { notFoundRoute } from './middleware/notFoundRoute';
 import { providersRoutes } from './modules/providers/providers.routes';
 import { userRoutes } from './modules/user/user.routes';
 import { mealsRoutes } from './modules/meals/meals.routes';
+import { CategoriesRoutes } from './modules/categories/categories.routes';
+import { errorHandler } from './middleware/globalErrorHandler';
 
 const app: Application = express();
 
@@ -23,9 +24,10 @@ app.get('/', (req, res) => {
 });
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/providers', providersRoutes);
 app.use('/api/meals', mealsRoutes);
+app.use('/api/categories', CategoriesRoutes);
 
 
 // if there is no matching route

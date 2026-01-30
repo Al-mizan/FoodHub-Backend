@@ -29,10 +29,32 @@ const getProviderById = async (req: Request, res: Response, next: NextFunction) 
     } catch (err) {
         next(err);
     }
-}; 
+};
+
+const createProviderProfile = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = req.user;
+        if (!user) throw new Error("You are unauthorized!");
+
+        if(user.role !== "PROVIDER") {
+            throw new Error("Forbidden! Only providers can create provider profiles.");
+        }
+        req.body.user_id = user.id;
+        
+        const result = await ProvidersService.createProviderProfile(req.body);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+
+    } catch (err) {
+        next(err);
+    }
+};
 
 export const ProvidersController = {
     getAllProviders,
     getProviderById,
-    
+    createProviderProfile,
+
 };

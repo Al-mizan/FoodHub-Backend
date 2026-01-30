@@ -1,6 +1,6 @@
 model Categories {
     id           String      @id @default(uuid())
-    name         String      @db.VarChar(100) // Pizza, Bengali, Chinese
+    name         String      @db.VarChar(100) // Pizza, Bengali, Chinese, Burger
     slug         String      @unique @db.VarChar(20) // URL-friendly
     icon_url     String?     @db.Text
     is_active    Boolean     @default(true)
