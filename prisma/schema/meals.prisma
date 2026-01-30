@@ -4,15 +4,17 @@ model Meals {
     user                User         @relation(fields: [provider_id], references: [id])
     category_id         String
     category            Categories   @relation(fields: [category_id], references: [id])
+
     name                String       @db.VarChar(300)
     description         String       @db.Text
     price               Float        @db.DoublePrecision
     discount_percentage Float?       @db.DoublePrecision
     discount_price      Float?       @db.DoublePrecision
     image_url           String       @db.Text
+    preparation_time    Int          @db.Integer // minutes
+
     dietary_type        DietaryType  @default(MIX)
     is_available        Boolean      @default(true)
-    preparation_time    Int          @db.Integer // minutes
     created_at          DateTime     @default(now())
     updated_at          DateTime     @updatedAt
     orderItems          OrderItems[]

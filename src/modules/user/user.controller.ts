@@ -35,8 +35,26 @@ const updateMe = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+const createProviderProfile = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = req.user;
+        if (!user) throw new Error("You are unauthorized!");
+
+        req.body.id = user.id;
+
+        const result = await UserService.createProviderProfile(req.body);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+
+    } catch (err) {
+        next(err);
+    }
+};
+
 export const UserController = {
     getMe,
     updateMe,
-
+    createProviderProfile,
 };
