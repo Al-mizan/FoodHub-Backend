@@ -7,7 +7,7 @@ const createCart = async (req: Request, res: Response, next: NextFunction) => {
         if (!user) {
             throw new Error("You are Unauthorized!");
         }
-        const result = await CartsService.createCart(req.body);
+        const result = await CartsService.createCart(user.id, req.body);
         res.status(201).json({
             success: true,
             data: result,

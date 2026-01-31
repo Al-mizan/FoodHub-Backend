@@ -19,7 +19,6 @@ model Meals {
     updated_at          DateTime     @updatedAt
     orderItems          OrderItems[]
     reviews             Reviews[]
-    // carts               Carts[]
     cartItems           CartItems[]
 
     @@index([dietary_type, is_available], name: "idx_meals_dietary_type_is_available")
