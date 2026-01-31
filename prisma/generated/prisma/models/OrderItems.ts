@@ -29,13 +29,13 @@ export type AggregateOrderItems = {
 export type OrderItemsAvgAggregateOutputType = {
   quantity: number | null
   unit_price: number | null
-  subtotal: number | null
+  sub_total_amount: number | null
 }
 
 export type OrderItemsSumAggregateOutputType = {
   quantity: number | null
   unit_price: number | null
-  subtotal: number | null
+  sub_total_amount: number | null
 }
 
 export type OrderItemsMinAggregateOutputType = {
@@ -44,7 +44,7 @@ export type OrderItemsMinAggregateOutputType = {
   meal_id: string | null
   quantity: number | null
   unit_price: number | null
-  subtotal: number | null
+  sub_total_amount: number | null
 }
 
 export type OrderItemsMaxAggregateOutputType = {
@@ -53,7 +53,7 @@ export type OrderItemsMaxAggregateOutputType = {
   meal_id: string | null
   quantity: number | null
   unit_price: number | null
-  subtotal: number | null
+  sub_total_amount: number | null
 }
 
 export type OrderItemsCountAggregateOutputType = {
@@ -62,7 +62,7 @@ export type OrderItemsCountAggregateOutputType = {
   meal_id: number
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount: number
   _all: number
 }
 
@@ -70,13 +70,13 @@ export type OrderItemsCountAggregateOutputType = {
 export type OrderItemsAvgAggregateInputType = {
   quantity?: true
   unit_price?: true
-  subtotal?: true
+  sub_total_amount?: true
 }
 
 export type OrderItemsSumAggregateInputType = {
   quantity?: true
   unit_price?: true
-  subtotal?: true
+  sub_total_amount?: true
 }
 
 export type OrderItemsMinAggregateInputType = {
@@ -85,7 +85,7 @@ export type OrderItemsMinAggregateInputType = {
   meal_id?: true
   quantity?: true
   unit_price?: true
-  subtotal?: true
+  sub_total_amount?: true
 }
 
 export type OrderItemsMaxAggregateInputType = {
@@ -94,7 +94,7 @@ export type OrderItemsMaxAggregateInputType = {
   meal_id?: true
   quantity?: true
   unit_price?: true
-  subtotal?: true
+  sub_total_amount?: true
 }
 
 export type OrderItemsCountAggregateInputType = {
@@ -103,7 +103,7 @@ export type OrderItemsCountAggregateInputType = {
   meal_id?: true
   quantity?: true
   unit_price?: true
-  subtotal?: true
+  sub_total_amount?: true
   _all?: true
 }
 
@@ -199,7 +199,7 @@ export type OrderItemsGroupByOutputType = {
   meal_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount: number
   _count: OrderItemsCountAggregateOutputType | null
   _avg: OrderItemsAvgAggregateOutputType | null
   _sum: OrderItemsSumAggregateOutputType | null
@@ -231,7 +231,7 @@ export type OrderItemsWhereInput = {
   meal_id?: Prisma.StringFilter<"OrderItems"> | string
   quantity?: Prisma.IntFilter<"OrderItems"> | number
   unit_price?: Prisma.FloatFilter<"OrderItems"> | number
-  subtotal?: Prisma.FloatFilter<"OrderItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"OrderItems"> | number
   order?: Prisma.XOR<Prisma.OrdersScalarRelationFilter, Prisma.OrdersWhereInput>
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
 }
@@ -242,7 +242,7 @@ export type OrderItemsOrderByWithRelationInput = {
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
   order?: Prisma.OrdersOrderByWithRelationInput
   meal?: Prisma.MealsOrderByWithRelationInput
 }
@@ -256,7 +256,7 @@ export type OrderItemsWhereUniqueInput = Prisma.AtLeast<{
   meal_id?: Prisma.StringFilter<"OrderItems"> | string
   quantity?: Prisma.IntFilter<"OrderItems"> | number
   unit_price?: Prisma.FloatFilter<"OrderItems"> | number
-  subtotal?: Prisma.FloatFilter<"OrderItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"OrderItems"> | number
   order?: Prisma.XOR<Prisma.OrdersScalarRelationFilter, Prisma.OrdersWhereInput>
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
 }, "id">
@@ -267,7 +267,7 @@ export type OrderItemsOrderByWithAggregationInput = {
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
   _count?: Prisma.OrderItemsCountOrderByAggregateInput
   _avg?: Prisma.OrderItemsAvgOrderByAggregateInput
   _max?: Prisma.OrderItemsMaxOrderByAggregateInput
@@ -284,14 +284,14 @@ export type OrderItemsScalarWhereWithAggregatesInput = {
   meal_id?: Prisma.StringWithAggregatesFilter<"OrderItems"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"OrderItems"> | number
   unit_price?: Prisma.FloatWithAggregatesFilter<"OrderItems"> | number
-  subtotal?: Prisma.FloatWithAggregatesFilter<"OrderItems"> | number
+  sub_total_amount?: Prisma.FloatWithAggregatesFilter<"OrderItems"> | number
 }
 
 export type OrderItemsCreateInput = {
   id?: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
   order: Prisma.OrdersCreateNestedOneWithoutOrderItemsInput
   meal: Prisma.MealsCreateNestedOneWithoutOrderItemsInput
 }
@@ -302,14 +302,14 @@ export type OrderItemsUncheckedCreateInput = {
   meal_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   order?: Prisma.OrdersUpdateOneRequiredWithoutOrderItemsNestedInput
   meal?: Prisma.MealsUpdateOneRequiredWithoutOrderItemsNestedInput
 }
@@ -320,7 +320,7 @@ export type OrderItemsUncheckedUpdateInput = {
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsCreateManyInput = {
@@ -329,14 +329,14 @@ export type OrderItemsCreateManyInput = {
   meal_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsUncheckedUpdateManyInput = {
@@ -345,7 +345,7 @@ export type OrderItemsUncheckedUpdateManyInput = {
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsListRelationFilter = {
@@ -364,13 +364,13 @@ export type OrderItemsCountOrderByAggregateInput = {
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type OrderItemsAvgOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type OrderItemsMaxOrderByAggregateInput = {
@@ -379,7 +379,7 @@ export type OrderItemsMaxOrderByAggregateInput = {
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type OrderItemsMinOrderByAggregateInput = {
@@ -388,13 +388,13 @@ export type OrderItemsMinOrderByAggregateInput = {
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type OrderItemsSumOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  subtotal?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type OrderItemsCreateNestedManyWithoutMealInput = {
@@ -485,7 +485,7 @@ export type OrderItemsCreateWithoutMealInput = {
   id?: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
   order: Prisma.OrdersCreateNestedOneWithoutOrderItemsInput
 }
 
@@ -494,7 +494,7 @@ export type OrderItemsUncheckedCreateWithoutMealInput = {
   order_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsCreateOrConnectWithoutMealInput = {
@@ -532,14 +532,14 @@ export type OrderItemsScalarWhereInput = {
   meal_id?: Prisma.StringFilter<"OrderItems"> | string
   quantity?: Prisma.IntFilter<"OrderItems"> | number
   unit_price?: Prisma.FloatFilter<"OrderItems"> | number
-  subtotal?: Prisma.FloatFilter<"OrderItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"OrderItems"> | number
 }
 
 export type OrderItemsCreateWithoutOrderInput = {
   id?: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
   meal: Prisma.MealsCreateNestedOneWithoutOrderItemsInput
 }
 
@@ -548,7 +548,7 @@ export type OrderItemsUncheckedCreateWithoutOrderInput = {
   meal_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsCreateOrConnectWithoutOrderInput = {
@@ -582,14 +582,14 @@ export type OrderItemsCreateManyMealInput = {
   order_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsUpdateWithoutMealInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   order?: Prisma.OrdersUpdateOneRequiredWithoutOrderItemsNestedInput
 }
 
@@ -598,7 +598,7 @@ export type OrderItemsUncheckedUpdateWithoutMealInput = {
   order_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsUncheckedUpdateManyWithoutMealInput = {
@@ -606,7 +606,7 @@ export type OrderItemsUncheckedUpdateManyWithoutMealInput = {
   order_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsCreateManyOrderInput = {
@@ -614,14 +614,14 @@ export type OrderItemsCreateManyOrderInput = {
   meal_id: string
   quantity: number
   unit_price: number
-  subtotal: number
+  sub_total_amount?: number
 }
 
 export type OrderItemsUpdateWithoutOrderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   meal?: Prisma.MealsUpdateOneRequiredWithoutOrderItemsNestedInput
 }
 
@@ -630,7 +630,7 @@ export type OrderItemsUncheckedUpdateWithoutOrderInput = {
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type OrderItemsUncheckedUpdateManyWithoutOrderInput = {
@@ -638,7 +638,7 @@ export type OrderItemsUncheckedUpdateManyWithoutOrderInput = {
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -649,7 +649,7 @@ export type OrderItemsSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   meal_id?: boolean
   quantity?: boolean
   unit_price?: boolean
-  subtotal?: boolean
+  sub_total_amount?: boolean
   order?: boolean | Prisma.OrdersDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItems"]>
@@ -660,7 +660,7 @@ export type OrderItemsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   meal_id?: boolean
   quantity?: boolean
   unit_price?: boolean
-  subtotal?: boolean
+  sub_total_amount?: boolean
   order?: boolean | Prisma.OrdersDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItems"]>
@@ -671,7 +671,7 @@ export type OrderItemsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   meal_id?: boolean
   quantity?: boolean
   unit_price?: boolean
-  subtotal?: boolean
+  sub_total_amount?: boolean
   order?: boolean | Prisma.OrdersDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItems"]>
@@ -682,10 +682,10 @@ export type OrderItemsSelectScalar = {
   meal_id?: boolean
   quantity?: boolean
   unit_price?: boolean
-  subtotal?: boolean
+  sub_total_amount?: boolean
 }
 
-export type OrderItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order_id" | "meal_id" | "quantity" | "unit_price" | "subtotal", ExtArgs["result"]["orderItems"]>
+export type OrderItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order_id" | "meal_id" | "quantity" | "unit_price" | "sub_total_amount", ExtArgs["result"]["orderItems"]>
 export type OrderItemsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrdersDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
@@ -711,7 +711,7 @@ export type $OrderItemsPayload<ExtArgs extends runtime.Types.Extensions.Internal
     meal_id: string
     quantity: number
     unit_price: number
-    subtotal: number
+    sub_total_amount: number
   }, ExtArgs["result"]["orderItems"]>
   composites: {}
 }
@@ -1142,7 +1142,7 @@ export interface OrderItemsFieldRefs {
   readonly meal_id: Prisma.FieldRef<"OrderItems", 'String'>
   readonly quantity: Prisma.FieldRef<"OrderItems", 'Int'>
   readonly unit_price: Prisma.FieldRef<"OrderItems", 'Float'>
-  readonly subtotal: Prisma.FieldRef<"OrderItems", 'Float'>
+  readonly sub_total_amount: Prisma.FieldRef<"OrderItems", 'Float'>
 }
     
 

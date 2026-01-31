@@ -29,13 +29,13 @@ export type AggregateCartItems = {
 export type CartItemsAvgAggregateOutputType = {
   quantity: number | null
   unit_price: number | null
-  total_price: number | null
+  sub_total_amount: number | null
 }
 
 export type CartItemsSumAggregateOutputType = {
   quantity: number | null
   unit_price: number | null
-  total_price: number | null
+  sub_total_amount: number | null
 }
 
 export type CartItemsMinAggregateOutputType = {
@@ -43,9 +43,8 @@ export type CartItemsMinAggregateOutputType = {
   cart_id: string | null
   meal_id: string | null
   quantity: number | null
-  expiry_date: Date | null
   unit_price: number | null
-  total_price: number | null
+  sub_total_amount: number | null
 }
 
 export type CartItemsMaxAggregateOutputType = {
@@ -53,9 +52,8 @@ export type CartItemsMaxAggregateOutputType = {
   cart_id: string | null
   meal_id: string | null
   quantity: number | null
-  expiry_date: Date | null
   unit_price: number | null
-  total_price: number | null
+  sub_total_amount: number | null
 }
 
 export type CartItemsCountAggregateOutputType = {
@@ -63,9 +61,8 @@ export type CartItemsCountAggregateOutputType = {
   cart_id: number
   meal_id: number
   quantity: number
-  expiry_date: number
   unit_price: number
-  total_price: number
+  sub_total_amount: number
   _all: number
 }
 
@@ -73,13 +70,13 @@ export type CartItemsCountAggregateOutputType = {
 export type CartItemsAvgAggregateInputType = {
   quantity?: true
   unit_price?: true
-  total_price?: true
+  sub_total_amount?: true
 }
 
 export type CartItemsSumAggregateInputType = {
   quantity?: true
   unit_price?: true
-  total_price?: true
+  sub_total_amount?: true
 }
 
 export type CartItemsMinAggregateInputType = {
@@ -87,9 +84,8 @@ export type CartItemsMinAggregateInputType = {
   cart_id?: true
   meal_id?: true
   quantity?: true
-  expiry_date?: true
   unit_price?: true
-  total_price?: true
+  sub_total_amount?: true
 }
 
 export type CartItemsMaxAggregateInputType = {
@@ -97,9 +93,8 @@ export type CartItemsMaxAggregateInputType = {
   cart_id?: true
   meal_id?: true
   quantity?: true
-  expiry_date?: true
   unit_price?: true
-  total_price?: true
+  sub_total_amount?: true
 }
 
 export type CartItemsCountAggregateInputType = {
@@ -107,9 +102,8 @@ export type CartItemsCountAggregateInputType = {
   cart_id?: true
   meal_id?: true
   quantity?: true
-  expiry_date?: true
   unit_price?: true
-  total_price?: true
+  sub_total_amount?: true
   _all?: true
 }
 
@@ -204,9 +198,8 @@ export type CartItemsGroupByOutputType = {
   cart_id: string
   meal_id: string
   quantity: number
-  expiry_date: Date
   unit_price: number
-  total_price: number
+  sub_total_amount: number
   _count: CartItemsCountAggregateOutputType | null
   _avg: CartItemsAvgAggregateOutputType | null
   _sum: CartItemsSumAggregateOutputType | null
@@ -237,9 +230,8 @@ export type CartItemsWhereInput = {
   cart_id?: Prisma.StringFilter<"CartItems"> | string
   meal_id?: Prisma.StringFilter<"CartItems"> | string
   quantity?: Prisma.IntFilter<"CartItems"> | number
-  expiry_date?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   unit_price?: Prisma.FloatFilter<"CartItems"> | number
-  total_price?: Prisma.FloatFilter<"CartItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"CartItems"> | number
   cart?: Prisma.XOR<Prisma.CartsScalarRelationFilter, Prisma.CartsWhereInput>
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
 }
@@ -249,9 +241,8 @@ export type CartItemsOrderByWithRelationInput = {
   cart_id?: Prisma.SortOrder
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  expiry_date?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
   cart?: Prisma.CartsOrderByWithRelationInput
   meal?: Prisma.MealsOrderByWithRelationInput
 }
@@ -264,9 +255,8 @@ export type CartItemsWhereUniqueInput = Prisma.AtLeast<{
   cart_id?: Prisma.StringFilter<"CartItems"> | string
   meal_id?: Prisma.StringFilter<"CartItems"> | string
   quantity?: Prisma.IntFilter<"CartItems"> | number
-  expiry_date?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   unit_price?: Prisma.FloatFilter<"CartItems"> | number
-  total_price?: Prisma.FloatFilter<"CartItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"CartItems"> | number
   cart?: Prisma.XOR<Prisma.CartsScalarRelationFilter, Prisma.CartsWhereInput>
   meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
 }, "id">
@@ -276,9 +266,8 @@ export type CartItemsOrderByWithAggregationInput = {
   cart_id?: Prisma.SortOrder
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  expiry_date?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
   _count?: Prisma.CartItemsCountOrderByAggregateInput
   _avg?: Prisma.CartItemsAvgOrderByAggregateInput
   _max?: Prisma.CartItemsMaxOrderByAggregateInput
@@ -294,17 +283,15 @@ export type CartItemsScalarWhereWithAggregatesInput = {
   cart_id?: Prisma.StringWithAggregatesFilter<"CartItems"> | string
   meal_id?: Prisma.StringWithAggregatesFilter<"CartItems"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"CartItems"> | number
-  expiry_date?: Prisma.DateTimeWithAggregatesFilter<"CartItems"> | Date | string
   unit_price?: Prisma.FloatWithAggregatesFilter<"CartItems"> | number
-  total_price?: Prisma.FloatWithAggregatesFilter<"CartItems"> | number
+  sub_total_amount?: Prisma.FloatWithAggregatesFilter<"CartItems"> | number
 }
 
 export type CartItemsCreateInput = {
   id?: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
   cart: Prisma.CartsCreateNestedOneWithoutCartItemsInput
   meal: Prisma.MealsCreateNestedOneWithoutCartItemsInput
 }
@@ -314,17 +301,15 @@ export type CartItemsUncheckedCreateInput = {
   cart_id: string
   meal_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   cart?: Prisma.CartsUpdateOneRequiredWithoutCartItemsNestedInput
   meal?: Prisma.MealsUpdateOneRequiredWithoutCartItemsNestedInput
 }
@@ -334,9 +319,8 @@ export type CartItemsUncheckedUpdateInput = {
   cart_id?: Prisma.StringFieldUpdateOperationsInput | string
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsCreateManyInput = {
@@ -344,17 +328,15 @@ export type CartItemsCreateManyInput = {
   cart_id: string
   meal_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsUncheckedUpdateManyInput = {
@@ -362,9 +344,8 @@ export type CartItemsUncheckedUpdateManyInput = {
   cart_id?: Prisma.StringFieldUpdateOperationsInput | string
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsListRelationFilter = {
@@ -382,15 +363,14 @@ export type CartItemsCountOrderByAggregateInput = {
   cart_id?: Prisma.SortOrder
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  expiry_date?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type CartItemsAvgOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type CartItemsMaxOrderByAggregateInput = {
@@ -398,9 +378,8 @@ export type CartItemsMaxOrderByAggregateInput = {
   cart_id?: Prisma.SortOrder
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  expiry_date?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type CartItemsMinOrderByAggregateInput = {
@@ -408,15 +387,14 @@ export type CartItemsMinOrderByAggregateInput = {
   cart_id?: Prisma.SortOrder
   meal_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
-  expiry_date?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type CartItemsSumOrderByAggregateInput = {
   quantity?: Prisma.SortOrder
   unit_price?: Prisma.SortOrder
-  total_price?: Prisma.SortOrder
+  sub_total_amount?: Prisma.SortOrder
 }
 
 export type CartItemsCreateNestedManyWithoutCartInput = {
@@ -461,7 +439,7 @@ export type CartItemsUncheckedUpdateManyWithoutCartNestedInput = {
   deleteMany?: Prisma.CartItemsScalarWhereInput | Prisma.CartItemsScalarWhereInput[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
+export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
@@ -514,9 +492,8 @@ export type CartItemsUncheckedUpdateManyWithoutMealNestedInput = {
 export type CartItemsCreateWithoutCartInput = {
   id?: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
   meal: Prisma.MealsCreateNestedOneWithoutCartItemsInput
 }
 
@@ -524,9 +501,8 @@ export type CartItemsUncheckedCreateWithoutCartInput = {
   id?: string
   meal_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsCreateOrConnectWithoutCartInput = {
@@ -563,17 +539,15 @@ export type CartItemsScalarWhereInput = {
   cart_id?: Prisma.StringFilter<"CartItems"> | string
   meal_id?: Prisma.StringFilter<"CartItems"> | string
   quantity?: Prisma.IntFilter<"CartItems"> | number
-  expiry_date?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   unit_price?: Prisma.FloatFilter<"CartItems"> | number
-  total_price?: Prisma.FloatFilter<"CartItems"> | number
+  sub_total_amount?: Prisma.FloatFilter<"CartItems"> | number
 }
 
 export type CartItemsCreateWithoutMealInput = {
   id?: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
   cart: Prisma.CartsCreateNestedOneWithoutCartItemsInput
 }
 
@@ -581,9 +555,8 @@ export type CartItemsUncheckedCreateWithoutMealInput = {
   id?: string
   cart_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsCreateOrConnectWithoutMealInput = {
@@ -616,17 +589,15 @@ export type CartItemsCreateManyCartInput = {
   id?: string
   meal_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsUpdateWithoutCartInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   meal?: Prisma.MealsUpdateOneRequiredWithoutCartItemsNestedInput
 }
 
@@ -634,35 +605,31 @@ export type CartItemsUncheckedUpdateWithoutCartInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsUncheckedUpdateManyWithoutCartInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   meal_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsCreateManyMealInput = {
   id?: string
   cart_id: string
   quantity: number
-  expiry_date: Date | string
   unit_price: number
-  total_price: number
+  sub_total_amount?: number
 }
 
 export type CartItemsUpdateWithoutMealInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
   cart?: Prisma.CartsUpdateOneRequiredWithoutCartItemsNestedInput
 }
 
@@ -670,18 +637,16 @@ export type CartItemsUncheckedUpdateWithoutMealInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cart_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type CartItemsUncheckedUpdateManyWithoutMealInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cart_id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  expiry_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unit_price?: Prisma.FloatFieldUpdateOperationsInput | number
-  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sub_total_amount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -691,9 +656,8 @@ export type CartItemsSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   cart_id?: boolean
   meal_id?: boolean
   quantity?: boolean
-  expiry_date?: boolean
   unit_price?: boolean
-  total_price?: boolean
+  sub_total_amount?: boolean
   cart?: boolean | Prisma.CartsDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cartItems"]>
@@ -703,9 +667,8 @@ export type CartItemsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   cart_id?: boolean
   meal_id?: boolean
   quantity?: boolean
-  expiry_date?: boolean
   unit_price?: boolean
-  total_price?: boolean
+  sub_total_amount?: boolean
   cart?: boolean | Prisma.CartsDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cartItems"]>
@@ -715,9 +678,8 @@ export type CartItemsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   cart_id?: boolean
   meal_id?: boolean
   quantity?: boolean
-  expiry_date?: boolean
   unit_price?: boolean
-  total_price?: boolean
+  sub_total_amount?: boolean
   cart?: boolean | Prisma.CartsDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cartItems"]>
@@ -727,12 +689,11 @@ export type CartItemsSelectScalar = {
   cart_id?: boolean
   meal_id?: boolean
   quantity?: boolean
-  expiry_date?: boolean
   unit_price?: boolean
-  total_price?: boolean
+  sub_total_amount?: boolean
 }
 
-export type CartItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cart_id" | "meal_id" | "quantity" | "expiry_date" | "unit_price" | "total_price", ExtArgs["result"]["cartItems"]>
+export type CartItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cart_id" | "meal_id" | "quantity" | "unit_price" | "sub_total_amount", ExtArgs["result"]["cartItems"]>
 export type CartItemsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cart?: boolean | Prisma.CartsDefaultArgs<ExtArgs>
   meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
@@ -757,9 +718,8 @@ export type $CartItemsPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     cart_id: string
     meal_id: string
     quantity: number
-    expiry_date: Date
     unit_price: number
-    total_price: number
+    sub_total_amount: number
   }, ExtArgs["result"]["cartItems"]>
   composites: {}
 }
@@ -1189,9 +1149,8 @@ export interface CartItemsFieldRefs {
   readonly cart_id: Prisma.FieldRef<"CartItems", 'String'>
   readonly meal_id: Prisma.FieldRef<"CartItems", 'String'>
   readonly quantity: Prisma.FieldRef<"CartItems", 'Int'>
-  readonly expiry_date: Prisma.FieldRef<"CartItems", 'DateTime'>
   readonly unit_price: Prisma.FieldRef<"CartItems", 'Float'>
-  readonly total_price: Prisma.FieldRef<"CartItems", 'Float'>
+  readonly sub_total_amount: Prisma.FieldRef<"CartItems", 'Float'>
 }
     
 

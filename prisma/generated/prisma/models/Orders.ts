@@ -323,7 +323,7 @@ export type OrdersScalarWhereWithAggregatesInput = {
 
 export type OrdersCreateInput = {
   id?: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -339,7 +339,7 @@ export type OrdersUncheckedCreateInput = {
   id?: string
   user_id: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -381,7 +381,7 @@ export type OrdersCreateManyInput = {
   id?: string
   user_id: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -592,7 +592,7 @@ export type OrdersUpdateOneRequiredWithoutReviewsNestedInput = {
 
 export type OrdersCreateWithoutUserInput = {
   id?: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -606,7 +606,7 @@ export type OrdersCreateWithoutUserInput = {
 export type OrdersUncheckedCreateWithoutUserInput = {
   id?: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -628,7 +628,7 @@ export type OrdersCreateManyUserInputEnvelope = {
 
 export type OrdersCreateWithoutProviderInput = {
   id?: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -642,7 +642,7 @@ export type OrdersCreateWithoutProviderInput = {
 export type OrdersUncheckedCreateWithoutProviderInput = {
   id?: string
   user_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -711,7 +711,7 @@ export type OrdersUpdateManyWithWhereWithoutProviderInput = {
 
 export type OrdersCreateWithoutOrderItemsInput = {
   id?: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -726,7 +726,7 @@ export type OrdersUncheckedCreateWithoutOrderItemsInput = {
   id?: string
   user_id: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -779,7 +779,7 @@ export type OrdersUncheckedUpdateWithoutOrderItemsInput = {
 
 export type OrdersCreateWithoutReviewsInput = {
   id?: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -794,7 +794,7 @@ export type OrdersUncheckedCreateWithoutReviewsInput = {
   id?: string
   user_id: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -848,7 +848,7 @@ export type OrdersUncheckedUpdateWithoutReviewsInput = {
 export type OrdersCreateManyUserInput = {
   id?: string
   provider_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string
@@ -859,7 +859,7 @@ export type OrdersCreateManyUserInput = {
 export type OrdersCreateManyProviderInput = {
   id?: string
   user_id: string
-  total_amount: number
+  total_amount?: number
   status?: $Enums.OrderStatus
   payment_status?: $Enums.PaymentStatus
   delivery_address: string

@@ -27,20 +27,19 @@ export type AggregateCarts = {
 }
 
 export type CartsAvgAggregateOutputType = {
-  quantity: number | null
+  total_price: number | null
 }
 
 export type CartsSumAggregateOutputType = {
-  quantity: number | null
+  total_price: number | null
 }
 
 export type CartsMinAggregateOutputType = {
   id: string | null
   user_id: string | null
   provider_id: string | null
-  meal_id: string | null
-  quantity: number | null
   status: $Enums.CartStatus | null
+  total_price: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -49,9 +48,8 @@ export type CartsMaxAggregateOutputType = {
   id: string | null
   user_id: string | null
   provider_id: string | null
-  meal_id: string | null
-  quantity: number | null
   status: $Enums.CartStatus | null
+  total_price: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -60,9 +58,8 @@ export type CartsCountAggregateOutputType = {
   id: number
   user_id: number
   provider_id: number
-  meal_id: number
-  quantity: number
   status: number
+  total_price: number
   created_at: number
   updated_at: number
   _all: number
@@ -70,20 +67,19 @@ export type CartsCountAggregateOutputType = {
 
 
 export type CartsAvgAggregateInputType = {
-  quantity?: true
+  total_price?: true
 }
 
 export type CartsSumAggregateInputType = {
-  quantity?: true
+  total_price?: true
 }
 
 export type CartsMinAggregateInputType = {
   id?: true
   user_id?: true
   provider_id?: true
-  meal_id?: true
-  quantity?: true
   status?: true
+  total_price?: true
   created_at?: true
   updated_at?: true
 }
@@ -92,9 +88,8 @@ export type CartsMaxAggregateInputType = {
   id?: true
   user_id?: true
   provider_id?: true
-  meal_id?: true
-  quantity?: true
   status?: true
+  total_price?: true
   created_at?: true
   updated_at?: true
 }
@@ -103,9 +98,8 @@ export type CartsCountAggregateInputType = {
   id?: true
   user_id?: true
   provider_id?: true
-  meal_id?: true
-  quantity?: true
   status?: true
+  total_price?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -201,9 +195,8 @@ export type CartsGroupByOutputType = {
   id: string
   user_id: string
   provider_id: string
-  meal_id: string
-  quantity: number
   status: $Enums.CartStatus
+  total_price: number
   created_at: Date
   updated_at: Date
   _count: CartsCountAggregateOutputType | null
@@ -235,14 +228,12 @@ export type CartsWhereInput = {
   id?: Prisma.StringFilter<"Carts"> | string
   user_id?: Prisma.StringFilter<"Carts"> | string
   provider_id?: Prisma.StringFilter<"Carts"> | string
-  meal_id?: Prisma.StringFilter<"Carts"> | string
-  quantity?: Prisma.IntFilter<"Carts"> | number
   status?: Prisma.EnumCartStatusFilter<"Carts"> | $Enums.CartStatus
+  total_price?: Prisma.FloatFilter<"Carts"> | number
   created_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   provider?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
   cartItems?: Prisma.CartItemsListRelationFilter
 }
 
@@ -250,14 +241,12 @@ export type CartsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
-  meal_id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   provider?: Prisma.UserOrderByWithRelationInput
-  meal?: Prisma.MealsOrderByWithRelationInput
   cartItems?: Prisma.CartItemsOrderByRelationAggregateInput
 }
 
@@ -268,14 +257,12 @@ export type CartsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CartsWhereInput | Prisma.CartsWhereInput[]
   user_id?: Prisma.StringFilter<"Carts"> | string
   provider_id?: Prisma.StringFilter<"Carts"> | string
-  meal_id?: Prisma.StringFilter<"Carts"> | string
-  quantity?: Prisma.IntFilter<"Carts"> | number
   status?: Prisma.EnumCartStatusFilter<"Carts"> | $Enums.CartStatus
+  total_price?: Prisma.FloatFilter<"Carts"> | number
   created_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   provider?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  meal?: Prisma.XOR<Prisma.MealsScalarRelationFilter, Prisma.MealsWhereInput>
   cartItems?: Prisma.CartItemsListRelationFilter
 }, "id">
 
@@ -283,9 +270,8 @@ export type CartsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
-  meal_id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.CartsCountOrderByAggregateInput
@@ -302,22 +288,20 @@ export type CartsScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Carts"> | string
   user_id?: Prisma.StringWithAggregatesFilter<"Carts"> | string
   provider_id?: Prisma.StringWithAggregatesFilter<"Carts"> | string
-  meal_id?: Prisma.StringWithAggregatesFilter<"Carts"> | string
-  quantity?: Prisma.IntWithAggregatesFilter<"Carts"> | number
   status?: Prisma.EnumCartStatusWithAggregatesFilter<"Carts"> | $Enums.CartStatus
+  total_price?: Prisma.FloatWithAggregatesFilter<"Carts"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Carts"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Carts"> | Date | string
 }
 
 export type CartsCreateInput = {
   id?: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCartsInput
   provider: Prisma.UserCreateNestedOneWithoutProviderInput
-  meal: Prisma.MealsCreateNestedOneWithoutCartsInput
   cartItems?: Prisma.CartItemsCreateNestedManyWithoutCartInput
 }
 
@@ -325,9 +309,8 @@ export type CartsUncheckedCreateInput = {
   id?: string
   user_id: string
   provider_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   cartItems?: Prisma.CartItemsUncheckedCreateNestedManyWithoutCartInput
@@ -335,13 +318,12 @@ export type CartsUncheckedCreateInput = {
 
 export type CartsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCartsNestedInput
   provider?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
-  meal?: Prisma.MealsUpdateOneRequiredWithoutCartsNestedInput
   cartItems?: Prisma.CartItemsUpdateManyWithoutCartNestedInput
 }
 
@@ -349,9 +331,8 @@ export type CartsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cartItems?: Prisma.CartItemsUncheckedUpdateManyWithoutCartNestedInput
@@ -361,17 +342,16 @@ export type CartsCreateManyInput = {
   id?: string
   user_id: string
   provider_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
 }
 
 export type CartsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -380,9 +360,8 @@ export type CartsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -401,24 +380,22 @@ export type CartsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
-  meal_id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
 
 export type CartsAvgOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
 }
 
 export type CartsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
-  meal_id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -427,15 +404,14 @@ export type CartsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   provider_id?: Prisma.SortOrder
-  meal_id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
 
 export type CartsSumOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
+  total_price?: Prisma.SortOrder
 }
 
 export type CartsScalarRelationFilter = {
@@ -527,16 +503,16 @@ export type CartsUncheckedUpdateManyWithoutProviderNestedInput = {
   deleteMany?: Prisma.CartsScalarWhereInput | Prisma.CartsScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
+export type EnumCartStatusFieldUpdateOperationsInput = {
+  set?: $Enums.CartStatus
+}
+
+export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type EnumCartStatusFieldUpdateOperationsInput = {
-  set?: $Enums.CartStatus
 }
 
 export type CartsCreateNestedOneWithoutCartItemsInput = {
@@ -553,65 +529,21 @@ export type CartsUpdateOneRequiredWithoutCartItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CartsUpdateToOneWithWhereWithoutCartItemsInput, Prisma.CartsUpdateWithoutCartItemsInput>, Prisma.CartsUncheckedUpdateWithoutCartItemsInput>
 }
 
-export type CartsCreateNestedManyWithoutMealInput = {
-  create?: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput> | Prisma.CartsCreateWithoutMealInput[] | Prisma.CartsUncheckedCreateWithoutMealInput[]
-  connectOrCreate?: Prisma.CartsCreateOrConnectWithoutMealInput | Prisma.CartsCreateOrConnectWithoutMealInput[]
-  createMany?: Prisma.CartsCreateManyMealInputEnvelope
-  connect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-}
-
-export type CartsUncheckedCreateNestedManyWithoutMealInput = {
-  create?: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput> | Prisma.CartsCreateWithoutMealInput[] | Prisma.CartsUncheckedCreateWithoutMealInput[]
-  connectOrCreate?: Prisma.CartsCreateOrConnectWithoutMealInput | Prisma.CartsCreateOrConnectWithoutMealInput[]
-  createMany?: Prisma.CartsCreateManyMealInputEnvelope
-  connect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-}
-
-export type CartsUpdateManyWithoutMealNestedInput = {
-  create?: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput> | Prisma.CartsCreateWithoutMealInput[] | Prisma.CartsUncheckedCreateWithoutMealInput[]
-  connectOrCreate?: Prisma.CartsCreateOrConnectWithoutMealInput | Prisma.CartsCreateOrConnectWithoutMealInput[]
-  upsert?: Prisma.CartsUpsertWithWhereUniqueWithoutMealInput | Prisma.CartsUpsertWithWhereUniqueWithoutMealInput[]
-  createMany?: Prisma.CartsCreateManyMealInputEnvelope
-  set?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  disconnect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  delete?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  connect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  update?: Prisma.CartsUpdateWithWhereUniqueWithoutMealInput | Prisma.CartsUpdateWithWhereUniqueWithoutMealInput[]
-  updateMany?: Prisma.CartsUpdateManyWithWhereWithoutMealInput | Prisma.CartsUpdateManyWithWhereWithoutMealInput[]
-  deleteMany?: Prisma.CartsScalarWhereInput | Prisma.CartsScalarWhereInput[]
-}
-
-export type CartsUncheckedUpdateManyWithoutMealNestedInput = {
-  create?: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput> | Prisma.CartsCreateWithoutMealInput[] | Prisma.CartsUncheckedCreateWithoutMealInput[]
-  connectOrCreate?: Prisma.CartsCreateOrConnectWithoutMealInput | Prisma.CartsCreateOrConnectWithoutMealInput[]
-  upsert?: Prisma.CartsUpsertWithWhereUniqueWithoutMealInput | Prisma.CartsUpsertWithWhereUniqueWithoutMealInput[]
-  createMany?: Prisma.CartsCreateManyMealInputEnvelope
-  set?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  disconnect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  delete?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  connect?: Prisma.CartsWhereUniqueInput | Prisma.CartsWhereUniqueInput[]
-  update?: Prisma.CartsUpdateWithWhereUniqueWithoutMealInput | Prisma.CartsUpdateWithWhereUniqueWithoutMealInput[]
-  updateMany?: Prisma.CartsUpdateManyWithWhereWithoutMealInput | Prisma.CartsUpdateManyWithWhereWithoutMealInput[]
-  deleteMany?: Prisma.CartsScalarWhereInput | Prisma.CartsScalarWhereInput[]
-}
-
 export type CartsCreateWithoutUserInput = {
   id?: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   provider: Prisma.UserCreateNestedOneWithoutProviderInput
-  meal: Prisma.MealsCreateNestedOneWithoutCartsInput
   cartItems?: Prisma.CartItemsCreateNestedManyWithoutCartInput
 }
 
 export type CartsUncheckedCreateWithoutUserInput = {
   id?: string
   provider_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   cartItems?: Prisma.CartItemsUncheckedCreateNestedManyWithoutCartInput
@@ -629,21 +561,19 @@ export type CartsCreateManyUserInputEnvelope = {
 
 export type CartsCreateWithoutProviderInput = {
   id?: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCartsInput
-  meal: Prisma.MealsCreateNestedOneWithoutCartsInput
   cartItems?: Prisma.CartItemsCreateNestedManyWithoutCartInput
 }
 
 export type CartsUncheckedCreateWithoutProviderInput = {
   id?: string
   user_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   cartItems?: Prisma.CartItemsUncheckedCreateNestedManyWithoutCartInput
@@ -682,9 +612,8 @@ export type CartsScalarWhereInput = {
   id?: Prisma.StringFilter<"Carts"> | string
   user_id?: Prisma.StringFilter<"Carts"> | string
   provider_id?: Prisma.StringFilter<"Carts"> | string
-  meal_id?: Prisma.StringFilter<"Carts"> | string
-  quantity?: Prisma.IntFilter<"Carts"> | number
   status?: Prisma.EnumCartStatusFilter<"Carts"> | $Enums.CartStatus
+  total_price?: Prisma.FloatFilter<"Carts"> | number
   created_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Carts"> | Date | string
 }
@@ -707,22 +636,20 @@ export type CartsUpdateManyWithWhereWithoutProviderInput = {
 
 export type CartsCreateWithoutCartItemsInput = {
   id?: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCartsInput
   provider: Prisma.UserCreateNestedOneWithoutProviderInput
-  meal: Prisma.MealsCreateNestedOneWithoutCartsInput
 }
 
 export type CartsUncheckedCreateWithoutCartItemsInput = {
   id?: string
   user_id: string
   provider_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -745,80 +672,29 @@ export type CartsUpdateToOneWithWhereWithoutCartItemsInput = {
 
 export type CartsUpdateWithoutCartItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCartsNestedInput
   provider?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
-  meal?: Prisma.MealsUpdateOneRequiredWithoutCartsNestedInput
 }
 
 export type CartsUncheckedUpdateWithoutCartItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type CartsCreateWithoutMealInput = {
-  id?: string
-  quantity?: number
-  status?: $Enums.CartStatus
-  created_at?: Date | string
-  updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutCartsInput
-  provider: Prisma.UserCreateNestedOneWithoutProviderInput
-  cartItems?: Prisma.CartItemsCreateNestedManyWithoutCartInput
-}
-
-export type CartsUncheckedCreateWithoutMealInput = {
-  id?: string
-  user_id: string
-  provider_id: string
-  quantity?: number
-  status?: $Enums.CartStatus
-  created_at?: Date | string
-  updated_at?: Date | string
-  cartItems?: Prisma.CartItemsUncheckedCreateNestedManyWithoutCartInput
-}
-
-export type CartsCreateOrConnectWithoutMealInput = {
-  where: Prisma.CartsWhereUniqueInput
-  create: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput>
-}
-
-export type CartsCreateManyMealInputEnvelope = {
-  data: Prisma.CartsCreateManyMealInput | Prisma.CartsCreateManyMealInput[]
-  skipDuplicates?: boolean
-}
-
-export type CartsUpsertWithWhereUniqueWithoutMealInput = {
-  where: Prisma.CartsWhereUniqueInput
-  update: Prisma.XOR<Prisma.CartsUpdateWithoutMealInput, Prisma.CartsUncheckedUpdateWithoutMealInput>
-  create: Prisma.XOR<Prisma.CartsCreateWithoutMealInput, Prisma.CartsUncheckedCreateWithoutMealInput>
-}
-
-export type CartsUpdateWithWhereUniqueWithoutMealInput = {
-  where: Prisma.CartsWhereUniqueInput
-  data: Prisma.XOR<Prisma.CartsUpdateWithoutMealInput, Prisma.CartsUncheckedUpdateWithoutMealInput>
-}
-
-export type CartsUpdateManyWithWhereWithoutMealInput = {
-  where: Prisma.CartsScalarWhereInput
-  data: Prisma.XOR<Prisma.CartsUpdateManyMutationInput, Prisma.CartsUncheckedUpdateManyWithoutMealInput>
 }
 
 export type CartsCreateManyUserInput = {
   id?: string
   provider_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -826,30 +702,27 @@ export type CartsCreateManyUserInput = {
 export type CartsCreateManyProviderInput = {
   id?: string
   user_id: string
-  meal_id: string
-  quantity?: number
   status?: $Enums.CartStatus
+  total_price?: number
   created_at?: Date | string
   updated_at?: Date | string
 }
 
 export type CartsUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
-  meal?: Prisma.MealsUpdateOneRequiredWithoutCartsNestedInput
   cartItems?: Prisma.CartItemsUpdateManyWithoutCartNestedInput
 }
 
 export type CartsUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cartItems?: Prisma.CartItemsUncheckedUpdateManyWithoutCartNestedInput
@@ -858,30 +731,27 @@ export type CartsUncheckedUpdateWithoutUserInput = {
 export type CartsUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CartsUpdateWithoutProviderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCartsNestedInput
-  meal?: Prisma.MealsUpdateOneRequiredWithoutCartsNestedInput
   cartItems?: Prisma.CartItemsUpdateManyWithoutCartNestedInput
 }
 
 export type CartsUncheckedUpdateWithoutProviderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cartItems?: Prisma.CartItemsUncheckedUpdateManyWithoutCartNestedInput
@@ -890,51 +760,8 @@ export type CartsUncheckedUpdateWithoutProviderInput = {
 export type CartsUncheckedUpdateManyWithoutProviderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  meal_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type CartsCreateManyMealInput = {
-  id?: string
-  user_id: string
-  provider_id: string
-  quantity?: number
-  status?: $Enums.CartStatus
-  created_at?: Date | string
-  updated_at?: Date | string
-}
-
-export type CartsUpdateWithoutMealInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutCartsNestedInput
-  provider?: Prisma.UserUpdateOneRequiredWithoutProviderNestedInput
-  cartItems?: Prisma.CartItemsUpdateManyWithoutCartNestedInput
-}
-
-export type CartsUncheckedUpdateWithoutMealInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cartItems?: Prisma.CartItemsUncheckedUpdateManyWithoutCartNestedInput
-}
-
-export type CartsUncheckedUpdateManyWithoutMealInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider_id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumCartStatusFieldUpdateOperationsInput | $Enums.CartStatus
+  total_price?: Prisma.FloatFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -974,14 +801,12 @@ export type CartsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   user_id?: boolean
   provider_id?: boolean
-  meal_id?: boolean
-  quantity?: boolean
   status?: boolean
+  total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
   cartItems?: boolean | Prisma.Carts$cartItemsArgs<ExtArgs>
   _count?: boolean | Prisma.CartsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carts"]>
@@ -990,58 +815,50 @@ export type CartsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   user_id?: boolean
   provider_id?: boolean
-  meal_id?: boolean
-  quantity?: boolean
   status?: boolean
+  total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carts"]>
 
 export type CartsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_id?: boolean
   provider_id?: boolean
-  meal_id?: boolean
-  quantity?: boolean
   status?: boolean
+  total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carts"]>
 
 export type CartsSelectScalar = {
   id?: boolean
   user_id?: boolean
   provider_id?: boolean
-  meal_id?: boolean
-  quantity?: boolean
   status?: boolean
+  total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type CartsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "provider_id" | "meal_id" | "quantity" | "status" | "created_at" | "updated_at", ExtArgs["result"]["carts"]>
+export type CartsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "provider_id" | "status" | "total_price" | "created_at" | "updated_at", ExtArgs["result"]["carts"]>
 export type CartsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
   cartItems?: boolean | Prisma.Carts$cartItemsArgs<ExtArgs>
   _count?: boolean | Prisma.CartsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CartsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }
 export type CartsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   provider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  meal?: boolean | Prisma.MealsDefaultArgs<ExtArgs>
 }
 
 export type $CartsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1049,16 +866,14 @@ export type $CartsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     provider: Prisma.$UserPayload<ExtArgs>
-    meal: Prisma.$MealsPayload<ExtArgs>
     cartItems: Prisma.$CartItemsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     user_id: string
     provider_id: string
-    meal_id: string
-    quantity: number
     status: $Enums.CartStatus
+    total_price: number
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["carts"]>
@@ -1457,7 +1272,6 @@ export interface Prisma__CartsClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   provider<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  meal<T extends Prisma.MealsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MealsDefaultArgs<ExtArgs>>): Prisma.Prisma__MealsClient<runtime.Types.Result.GetResult<Prisma.$MealsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   cartItems<T extends Prisma.Carts$cartItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Carts$cartItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1491,9 +1305,8 @@ export interface CartsFieldRefs {
   readonly id: Prisma.FieldRef<"Carts", 'String'>
   readonly user_id: Prisma.FieldRef<"Carts", 'String'>
   readonly provider_id: Prisma.FieldRef<"Carts", 'String'>
-  readonly meal_id: Prisma.FieldRef<"Carts", 'String'>
-  readonly quantity: Prisma.FieldRef<"Carts", 'Int'>
   readonly status: Prisma.FieldRef<"Carts", 'CartStatus'>
+  readonly total_price: Prisma.FieldRef<"Carts", 'Float'>
   readonly created_at: Prisma.FieldRef<"Carts", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Carts", 'DateTime'>
 }

@@ -28,8 +28,9 @@ app.all('/api/auth/{*any}', toNodeHandler(auth));
 app.use('/api/users', userRoutes);
 app.use('/api/providers', providersRoutes);
 app.use('/api/categories', CategoriesRoutes);
-app.use('/api/orders', ordersRoutes);
 app.use('/api/admin', adminRoutes);
+// app.use('/api/carts', cartsRoutes);
+app.use('/api/orders', ordersRoutes);
 
 
 // if there is no matching route

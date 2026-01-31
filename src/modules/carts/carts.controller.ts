@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import { OrdersService } from "./carts.service";
+import { CartsService } from "./carts.service";
 
-const createOrder = async (req: Request, res: Response, next: NextFunction) => {
+const createCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = req.user;
         if (!user) {
             throw new Error("You are Unauthorized!");
         }
-        const result = await OrdersService.createOrder(req.body);
+        const result = await CartsService.createCart(req.body);
         res.status(201).json({
             success: true,
             data: result,
@@ -17,7 +17,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export const OrdersController = {
-    createOrder,
+export const CartsController = {
+    createCart,
 
 };

@@ -10,9 +10,9 @@
 */
 
 export const CartStatus = {
-  active: 'active',
-  ordered: 'ordered',
-  cancelled: 'cancelled'
+  ACTIVE: 'ACTIVE',
+  ORDERED: 'ORDERED',
+  CANCELLED: 'CANCELLED'
 } as const
 
 export type CartStatus = (typeof CartStatus)[keyof typeof CartStatus]
