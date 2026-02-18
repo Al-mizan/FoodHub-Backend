@@ -27,9 +27,13 @@ const createCart = async (user_id: string, data: CreateCartData) => {
                 user_id,
                 provider_id: meal.provider_id,
             },
+            select: {
+                id: true,
+                status: true,
+            }
         });
 
-        if (!cart) {
+        if (!cart || cart?.status !== "ACTIVE") {
             cart = await ts.carts.create({
                 data: {
                     user_id,

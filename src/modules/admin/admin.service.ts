@@ -18,7 +18,33 @@ const updateUser = async (id: string, data: Partial<UserUncheckedUpdateInput>) =
     });
 }
 
+const getOrders = async () => {
+    return await prisma.orders.findMany({
+        include: {
+            user: {
+                select: { id: true, name: true, email: true, phone: true },
+            },
+            provider: {
+                select: {
+                    id: true,
+                    name: true,
+                    providerProfile: { select: { restaurant_name: true } },
+                },
+            },
+            orderItems: {
+                include: {
+                    meal: {
+                        select: { id: true, name: true, image_url: true },
+                    },
+                },
+            },
+        },
+        orderBy: { created_at: "desc" },
+    });
+}
+
 export const AdminService = {
     getUser,
     updateUser,
+    getOrders,
 };

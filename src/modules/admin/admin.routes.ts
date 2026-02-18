@@ -8,6 +8,7 @@ const router = Router();
 
 router.get('/users', logger, auth(UserRole.ADMIN), AdminController.getUser);
 router.patch('/users/:id', logger, auth(UserRole.ADMIN), AdminController.updateUser);
+router.get('/orders', logger, auth(UserRole.ADMIN), AdminController.getOrders);
 
 
 export const adminRoutes: Router = router;

@@ -53,6 +53,27 @@ const createReview = async (
             },
         });
 
+        // 6. Recalculate restaurant's average rating
+        const meal = await ts.meals.findUniqueOrThrow({
+            where: { id: data.meal_id },
+            select: { provider_id: true },
+        });
+
+        const agg = await ts.meals.aggregate({
+            where: { provider_id: meal.provider_id, rating_count: { gt: 0 } },
+            _sum: { rating_sum: true, rating_count: true },
+        });
+
+        const totalSum = agg._sum.rating_sum ?? 0;
+        const totalCount = agg._sum.rating_count ?? 0;
+        const newAvg = totalCount > 0 ? totalSum / totalCount : 0;
+        console.log(newAvg);
+
+        await ts.providerProfiles.update({
+            where: { user_id: meal.provider_id },
+            data: { rating_avg: Math.round(newAvg * 10) / 10 },
+        });
+
         return review;
     });
 };

@@ -7,7 +7,7 @@ import {
 import { OrderStatus, PaymentStatus } from "../../../prisma/generated/prisma/enums";
 import parseTimeString from "../../helper/parseTimeString";
 import { prisma } from "../../lib/prisma";
-import { GetAllProvidersParams, GetProviderMealsParams } from "./providers.interface";
+import { GetAllProvidersParams, GetProviderMealsParams, VALID_STATUS_TRANSITIONS } from "./providers.interface";
 
 /*  PROVIDER SERVICES /**
 
@@ -242,16 +242,8 @@ const deleteMeal = async (providerId: string, mealId: string) => {
     });
 };
 
-/* ORDER SERVICES /**
 
-/* Update order status (status and/or payment_status) */
-const VALID_STATUS_TRANSITIONS: Record<string, string[]> = {
-    PENDING: ["PREPARING", "CANCELLED"],
-    PREPARING: ["ON_THE_WAY", "CANCELLED"],
-    ON_THE_WAY: ["DELIVERED"],
-    DELIVERED: [],
-    CANCELLED: [],
-};
+
 
 const updateOrderStatus = async (
     orderId: string,

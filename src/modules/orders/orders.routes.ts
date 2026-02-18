@@ -9,6 +9,7 @@ const router = Router();
 router.post("/", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.createOrder);
 router.get("/", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.getOrder);
 router.get("/provider", logger, auth(UserRole.PROVIDER), OrdersController.getProviderOrders);
+router.patch("/:order_id/cancel", logger, auth(UserRole.CUSTOMER, UserRole.PROVIDER), OrdersController.cancelOrder);
 router.get("/:order_id", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.getOrderNyId);
 
 

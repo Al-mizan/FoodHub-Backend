@@ -35,6 +35,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/meals', mealsRoutes);
 app.use('/api/carts', cartsRoutes);
 app.use('/api/orders', ordersRoutes);
+app.use('/api/reviews', reviewsRoutes);
 
 
 // if there is no matching route

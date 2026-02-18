@@ -141,9 +141,39 @@ const getProviderOrders = async (provider_id: string) => {
     });
 }
 
+const cancelOrder = async (order_id: string, user_id: string) => {
+    const order = await prisma.orders.findFirst({
+        where: { id: order_id, user_id },
+    });
+
+    if (!order) {
+        throw new Error("Order not found");
+    }
+
+    const cancellableStatuses = ["PENDING", "PREPARING"];
+    if (!cancellableStatuses.includes(order.status)) {
+        throw new Error("Order cannot be cancelled at this stage");
+    }
+
+    return await prisma.orders.update({
+        where: { id: order_id },
+        data: { status: "CANCELLED" },
+        include: {
+            orderItems: {
+                include: {
+                    meal: {
+                        select: { id: true, name: true, image_url: true },
+                    },
+                },
+            },
+        },
+    });
+};
+
 export const OrdersService = {
     createOrder,
     getOrder,
     getOrderById,
     getProviderOrders,
+    cancelOrder,
 };

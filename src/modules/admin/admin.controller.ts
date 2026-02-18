@@ -33,8 +33,27 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
         }
         const { id } = req.params;
         if (!id) throw new Error("User ID is required");
-        
+
         const result = await AdminService.updateUser(id as string, req.body);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+const getOrders = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = req.user;
+        if (!user) {
+            throw new Error("You are Unauthorized!");
+        }
+        if (user.role !== UserRole.ADMIN) {
+            throw new Error("Forbidden Access!");
+        }
+        const result = await AdminService.getOrders();
         res.status(200).json({
             success: true,
             data: result,
@@ -47,5 +66,5 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 export const AdminController = {
     getUser,
     updateUser,
-
+    getOrders,
 };
