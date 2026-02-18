@@ -12,6 +12,7 @@ import { ordersRoutes } from './modules/orders/orders.routes';
 import { adminRoutes } from './modules/admin/admin.routes';
 import { cartsRoutes } from './modules/carts/carts.routes';
 import { mealsRoutes } from './modules/meals/meals.routes';
+import { reviewsRoutes } from './modules/reviews/reviews.routes';
 
 const app: Application = express();
 

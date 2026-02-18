@@ -14,7 +14,7 @@ router.get("/:providerId/meals/:mealId", logger, ProvidersController.getMealById
 router.patch("/:providerId/meals/:mealId", logger, auth(UserRole.PROVIDER), ProvidersController.updateMeal);
 router.delete("/:providerId/meals/:mealId", logger, auth(UserRole.PROVIDER), ProvidersController.deleteMeal);
 
-router.post("/provider-profile", logger, auth(UserRole.PROVIDER), ProvidersController.createProviderProfile);
+router.post("/provider-profile", logger, auth(UserRole.CUSTOMER, UserRole.PROVIDER), ProvidersController.createProviderProfile);
 router.get("/:id", logger, ProvidersController.getProviderById);
 router.patch("/orders/:orderId", logger, auth(UserRole.PROVIDER), ProvidersController.updateOrderStatus);
 

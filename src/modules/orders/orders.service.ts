@@ -75,13 +75,23 @@ const getOrder = async (user_id: string) => {
     return await prisma.orders.findMany({
         where: { user_id },
         include: {
+            provider: {
+                select: {
+                    id: true,
+                    name: true,
+                    providerProfile: { select: { restaurant_name: true } },
+                },
+            },
             orderItems: {
                 include: {
                     meal: {
-                        select: { name: true, image_url: true }
+                        select: { id: true, name: true, image_url: true }
                     }
                 }
-            }
+            },
+            reviews: {
+                select: { id: true, meal_id: true, rating: true },
+            },
         },
         orderBy: { created_at: "desc" }
     });
@@ -91,14 +101,43 @@ const getOrderById = async (order_id: string) => {
     return await prisma.orders.findFirst({
         where: { id: order_id },
         include: {
+            provider: {
+                select: {
+                    id: true,
+                    name: true,
+                    providerProfile: { select: { restaurant_name: true } },
+                },
+            },
             orderItems: {
                 include: {
                     meal: {
-                        select: { name: true, image_url: true }
+                        select: { id: true, name: true, image_url: true }
                     }
                 }
-            }
+            },
+            reviews: {
+                select: { id: true, meal_id: true, rating: true, comment: true },
+            },
         }
+    });
+}
+
+const getProviderOrders = async (provider_id: string) => {
+    return await prisma.orders.findMany({
+        where: { provider_id },
+        include: {
+            user: {
+                select: { id: true, name: true, email: true, phone: true },
+            },
+            orderItems: {
+                include: {
+                    meal: {
+                        select: { id: true, name: true, image_url: true }
+                    }
+                },
+            },
+        },
+        orderBy: { created_at: "desc" },
     });
 }
 
@@ -106,5 +145,5 @@ export const OrdersService = {
     createOrder,
     getOrder,
     getOrderById,
-
+    getProviderOrders,
 };

@@ -34,6 +34,8 @@ const createCart = async (user_id: string, data: CreateCartData) => {
                 data: {
                     user_id,
                     provider_id: meal.provider_id,
+                    // Ensure newly created carts are visible in queries that filter by ACTIVE status
+                    status: "ACTIVE",
                     total_price: 0,
                 }
             });
@@ -198,19 +200,17 @@ const updateCart = async (user_id: string, data: CreateCartData) => {
 }
 
 const getCartCount = async (user_id: string) => {
-    const carts = await prisma.carts.findMany({
+    const result = await prisma.cartItems.aggregate({
+        _sum: { quantity: true },
         where: {
-            user_id,
-            status: "ACTIVE",
+            cart: {
+                user_id,
+                status: "ACTIVE",
+            },
         },
-        include: {
-            cartItems: true,
-        }
     });
 
-    let totalItems = carts.length ?? 0;
-
-    return { count: totalItems };
+    return { count: result._sum.quantity ?? 0 };
 };
 
 const getCart = async (user_id: string) => {
@@ -251,9 +251,64 @@ const getCart = async (user_id: string) => {
     return carts;
 };
 
+const deleteCartItem = async (user_id: string, cartItemId: string) => {
+    return await prisma.$transaction(async (ts) => {
+        // 1. Find the cart item and verify ownership
+        const cartItem = await ts.cartItems.findUniqueOrThrow({
+            where: { id: cartItemId },
+            include: { cart: true },
+        });
+
+        if (cartItem.cart.user_id !== user_id) {
+            throw new Error("Unauthorized: This cart does not belong to you");
+        }
+
+        // 2. Delete the cart item
+        await ts.cartItems.delete({ where: { id: cartItemId } });
+
+        // 3. Update cart total
+        await ts.carts.update({
+            where: { id: cartItem.cart_id },
+            data: { total_price: { decrement: cartItem.sub_total_amount } },
+        });
+
+        // 4. If no items left, delete the cart
+        const remaining = await ts.cartItems.count({ where: { cart_id: cartItem.cart_id } });
+        if (remaining === 0) {
+            await ts.carts.delete({ where: { id: cartItem.cart_id } });
+            return null;
+        }
+
+        return await ts.carts.findUnique({
+            where: { id: cartItem.cart_id },
+            include: {
+                cartItems: {
+                    include: { meal: { select: { name: true, image_url: true } } },
+                },
+            },
+        });
+    });
+};
+
+const deleteCart = async (user_id: string, cartId: string) => {
+    const cart = await prisma.carts.findUniqueOrThrow({
+        where: { id: cartId },
+    });
+
+    if (cart.user_id !== user_id) {
+        throw new Error("Unauthorized: This cart does not belong to you");
+    }
+
+    // Cascade deletes cart items automatically
+    await prisma.carts.delete({ where: { id: cartId } });
+    return null;
+};
+
 export const CartsService = {
     createCart,
     updateCart,
     getCartCount,
     getCart,
+    deleteCartItem,
+    deleteCart,
 };

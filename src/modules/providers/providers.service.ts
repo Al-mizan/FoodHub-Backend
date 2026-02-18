@@ -86,12 +86,25 @@ const createProviderProfile = async (data: ProviderProfilesUncheckedCreateInput)
         ? parseTimeString(data.closing_time)
         : data.closing_time;
 
-    return await prisma.providerProfiles.create({
-        data: {
-            ...data,
-            opening_time,
-            closing_time,
-        },
+    return await prisma.$transaction(async (ts) => {
+        const existingProfile = await ts.providerProfiles.findUnique({
+            where: { user_id: data.user_id as string },
+        });
+        if (existingProfile) {
+            throw new Error("Provider profile already exists for this user.");
+        }
+
+        const profile = await ts.providerProfiles.create({
+            data: { ...data, opening_time, closing_time },
+        });
+
+        // Upgrade user role from CUSTOMER to PROVIDER
+        await ts.user.update({
+            where: { id: data.user_id as string },
+            data: { role: "PROVIDER" },
+        });
+
+        return profile;
     });
 };
 
@@ -127,16 +140,32 @@ const getMealsByProviderId = async (providerId: string, query: GetProviderMealsP
 
     const where: MealsWhereInput = { AND: andConditions };
 
-    const [data, total] = await Promise.all([
+    const [meals, total] = await Promise.all([
         prisma.meals.findMany({
             where,
             skip,
             take: limit,
             orderBy: { [sortBy]: sortOrder },
-            include: { category: true },
+            include: {
+                category: true,
+                user: {
+                    include: {
+                        providerProfile: {
+                            select: {
+                                restaurant_name: true,
+                            },
+                        },
+                    },
+                },
+            },
         }),
         prisma.meals.count({ where }),
     ]);
+
+    const data = meals.map((meal) => ({
+        ...meal,
+        restaurant_name: meal.user.providerProfile?.restaurant_name ?? null,
+    }));
 
     return {
         data,
@@ -216,12 +245,35 @@ const deleteMeal = async (providerId: string, mealId: string) => {
 /* ORDER SERVICES /**
 
 /* Update order status (status and/or payment_status) */
+const VALID_STATUS_TRANSITIONS: Record<string, string[]> = {
+    PENDING: ["PREPARING", "CANCELLED"],
+    PREPARING: ["ON_THE_WAY", "CANCELLED"],
+    ON_THE_WAY: ["DELIVERED"],
+    DELIVERED: [],
+    CANCELLED: [],
+};
+
 const updateOrderStatus = async (
     orderId: string,
+    providerId: string,
     data: { status?: OrderStatus; payment_status?: PaymentStatus }
 ) => {
-    const updateData: { status?: OrderStatus; payment_status?: PaymentStatus } = {};
+    const order = await prisma.orders.findUniqueOrThrow({ where: { id: orderId } });
 
+    // Verify the order belongs to this provider
+    if (order.provider_id !== providerId) {
+        throw new Error("You can only update orders for your restaurant.");
+    }
+
+    // Validate status transition
+    if (data.status) {
+        const allowed = VALID_STATUS_TRANSITIONS[order.status];
+        if (!allowed || !allowed.includes(data.status)) {
+            throw new Error(`Cannot transition from ${order.status} to ${data.status}`);
+        }
+    }
+
+    const updateData: { status?: OrderStatus; payment_status?: PaymentStatus } = {};
     if (data.status) updateData.status = data.status;
     if (data.payment_status) updateData.payment_status = data.payment_status;
 

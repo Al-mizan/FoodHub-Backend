@@ -54,8 +54,25 @@ const getOrderNyId = async (req: Request, res: Response, next: NextFunction) => 
     }
 };
 
+const getProviderOrders = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = req.user;
+        if (!user) {
+            throw new Error("You are Unauthorized!");
+        }
+        const result = await OrdersService.getProviderOrders(user.id);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
 export const OrdersController = {
     createOrder,
     getOrder,
     getOrderNyId,
+    getProviderOrders,
 };

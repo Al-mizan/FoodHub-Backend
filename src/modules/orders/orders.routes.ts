@@ -8,6 +8,7 @@ const router = Router();
 
 router.post("/", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.createOrder);
 router.get("/", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.getOrder);
+router.get("/provider", logger, auth(UserRole.PROVIDER), OrdersController.getProviderOrders);
 router.get("/:order_id", logger, auth(UserRole.PROVIDER, UserRole.CUSTOMER), OrdersController.getOrderNyId);
 
 
