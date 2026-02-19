@@ -2,20 +2,26 @@ import app from "./app";
 import { PORT } from "./config/env";
 import { prisma } from "./lib/prisma";
 
-async function main() {
-    try {
-        await prisma.$connect();
-        console.log("Connected to the database successfully.");
-        
-        app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
-        });
+// Local development — start a persistent server
+if (!process.env.VERCEL) {
+    async function main() {
+        try {
+            await prisma.$connect();
+            console.log("Connected to the database successfully.");
 
-    } catch (error) {
-        console.error("An error occurred:", error);
-        await prisma.$disconnect();
-        process.exit(1);
+            app.listen(PORT, () => {
+                console.log(`Server is running on http://localhost:${PORT}`);
+            });
+
+        } catch (error) {
+            console.error("An error occurred:", error);
+            await prisma.$disconnect();
+            process.exit(1);
+        }
     }
+
+    main();
 }
 
-main();
+// Vercel serverless — export the Express app as a handler
+export default app;
