@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import nodemailer from "nodemailer";
 import { prisma } from "./prisma";
-import { APP_URL, BETTER_AUTH_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, PUBLIC_APP_URL, PUBLIC_BETTER_AUTH_URL, SMTP_HOST, SMTP_PASS, SMTP_PORT, SMTP_USER } from "../config/env";
+import { APP_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, PUBLIC_APP_URL, PUBLIC_BETTER_AUTH_URL, SMTP_HOST, SMTP_PASS, SMTP_PORT, SMTP_USER } from "../config/env";
 import { UserRole } from '../constants/roles';
 
 
@@ -163,6 +163,16 @@ export const auth = betterAuth({
     state: {
       name: "khabo-oauth-state",
       options: {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+        path: "/",
+      },
+    },
+    pkCodeVerifier: {
+      name: "khabo-pk-code-verifier",
+      options: {
+        httpOnly: true,
         sameSite: "none",
         secure: true,
         path: "/",
